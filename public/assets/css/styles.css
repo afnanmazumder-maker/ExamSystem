@@ -543,3 +543,31 @@ button:hover, .btn:hover {
 .gap-2 { gap: 0.5rem; }
 .gap-3 { gap: 1rem; }
 .gap-4 { gap: 1.5rem; }
+
+/* Exam Timer */
+.exam-timer {
+  background: var(--warning);
+  color: var(--bg-white);
+  padding: 1rem;
+  border-radius: var(--radius);
+  margin: 1rem 0;
+  text-align: center;
+  box-shadow: var(--shadow);
+}
+
+.exam-timer h3 {
+  margin: 0;
+  font-size: 1.25rem;
+  font-weight: 600;
+}
+
+#timer {
+  font-family: 'Courier New', monospace;
+  font-size: 1.5rem;
+  font-weight: bold;
+  background: rgba(255, 255, 255, 0.2);
+  padding: 0.5rem 1rem;
+  border-radius: var(--radius-sm);
+  display: inline-block;
+  margin-left: 0.5rem;
+}

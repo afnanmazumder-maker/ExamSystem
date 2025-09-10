@@ -13,6 +13,7 @@ CREATE TABLE IF NOT EXISTS exams (
   description TEXT,
   created_by INT NOT NULL,
   is_published TINYINT(1) NOT NULL DEFAULT 0,
+  time_limit_minutes INT DEFAULT 60,
   created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
   FOREIGN KEY (created_by) REFERENCES users(id) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;

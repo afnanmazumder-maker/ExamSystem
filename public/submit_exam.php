@@ -8,6 +8,13 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') { header('Location: /dashboard.php');
 $exam_id = (int)($_POST['exam_id'] ?? 0);
 $answers = $_POST['answers'] ?? [];
 
+// Check if student has already taken this exam
+$check_stmt = $pdo->prepare('SELECT id FROM submissions WHERE exam_id=? AND student_id=?');
+$check_stmt->execute([$exam_id, current_user()['id']]);
+if ($check_stmt->fetch()) {
+    die('You have already taken this exam.');
+}
+
 // grade
 $score = 0;
 $total = 0;
