@@ -5,7 +5,6 @@ require_once __DIR__ . '/../includes/helpers.php';
 require_role(['teacher','admin']);
 $user = current_user();
 
-// Publish/unpublish actions
 if (isset($_GET['action'], $_GET['id'])) {
     $id = (int)$_GET['id'];
     if ($_GET['action'] === 'publish') {

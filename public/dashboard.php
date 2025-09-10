@@ -15,7 +15,6 @@ include __DIR__ . '/../includes/header.php';
       <?php
       $stmt = $pdo->query('SELECT e.*, u.name AS creator FROM exams e JOIN users u ON e.created_by=u.id WHERE e.is_published=1 ORDER BY e.created_at DESC');
       foreach ($stmt as $exam): 
-        // Check if current student has already taken this exam
         $submission_check = $pdo->prepare('SELECT id FROM submissions WHERE exam_id = ? AND student_id = ?');
         $submission_check->execute([$exam['id'], $user['id']]);
         $has_taken = $submission_check->fetch() !== false;

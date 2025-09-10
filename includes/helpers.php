@@ -15,6 +15,5 @@ function ensure_default_admin() {
             $stmt->execute(['Admin', 'admin@example.com', $hash, 'admin']);
         }
     } catch (Throwable $e) {
-        // ignore
     }
 }

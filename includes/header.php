@@ -2,7 +2,6 @@
 require_once __DIR__ . '/auth.php';
 $user = current_user();
 
-// Detect current page for background
 $current_page = basename($_SERVER['PHP_SELF'], '.php');
 $bg_class = '';
 switch($current_page) {

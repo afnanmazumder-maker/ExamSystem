@@ -10,7 +10,6 @@ $stmt->execute([$exam_id]);
 $exam = $stmt->fetch();
 if (!$exam) { http_response_code(404); die('Exam not found or not available'); }
 
-// Check if student has already taken this exam
 $check_stmt = $pdo->prepare('SELECT id FROM submissions WHERE exam_id=? AND student_id=?');
 $check_stmt->execute([$exam_id, current_user()['id']]);
 if ($check_stmt->fetch()) {
@@ -45,8 +44,7 @@ include __DIR__ . '/../includes/header.php';
 </form>
 
 <script>
-// Timer functionality
-let timeLeft = <?php echo $exam['time_limit_minutes'] * 60; ?>; // Convert minutes to seconds
+let timeLeft = <?php echo $exam['time_limit_minutes'] * 60; ?>;
 const timerElement = document.getElementById('timer');
 const examForm = document.getElementById('exam-form');
 
@@ -64,15 +62,12 @@ function updateTimer() {
     timeLeft--;
 }
 
-// Update timer every second
 const timerInterval = setInterval(updateTimer, 1000);
 
-// Initial timer display
 updateTimer();
 
-// Warn user when 5 minutes are left
 setTimeout(() => {
-    if (timeLeft <= 300) { // 5 minutes = 300 seconds
+    if (timeLeft <= 300) {
         alert('Warning: Only 5 minutes remaining!');
     }
 }, (timeLeft - 300) * 1000);

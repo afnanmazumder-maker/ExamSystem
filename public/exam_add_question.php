@@ -6,7 +6,6 @@ require_role(['teacher','admin']);
 $user = current_user();
 $exam_id = (int)($_GET['exam_id'] ?? 0);
 
-// Verify ownership or admin
 $stmt = $pdo->prepare('SELECT * FROM exams WHERE id=?');
 $stmt->execute([$exam_id]);
 $exam = $stmt->fetch();

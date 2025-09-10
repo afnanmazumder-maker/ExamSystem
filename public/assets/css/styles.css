@@ -563,7 +563,7 @@ button:focus, .btn:focus {
 .exam-banner {
   width: 100%;
   height: 0;
-  padding-bottom: 55.56%; /* 1000/1800 = 0.5556 = 55.56% for 1.8:1 aspect ratio */
+  padding-bottom: 55.56%;
   overflow: hidden;
   background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
   position: relative;
@@ -677,7 +677,7 @@ button:focus, .btn:focus {
 
 @media (max-width: 768px) {
   .exam-banner {
-    padding-bottom: 55.56%; /* Maintain 1.8:1 aspect ratio on mobile */
+    padding-bottom: 55.56%;
   }
   
   .exam-content {

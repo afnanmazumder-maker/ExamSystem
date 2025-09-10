@@ -16,7 +16,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     } elseif ($time_limit < 1 || $time_limit > 300) {
         $error = 'Time limit must be between 1 and 300 minutes';
     } else {
-        // Handle banner image upload
         if (isset($_FILES['banner_image']) && $_FILES['banner_image']['error'] === UPLOAD_ERR_OK) {
             $allowed_types = ['image/jpeg', 'image/png', 'image/gif', 'image/webp'];
             $file_type = $_FILES['banner_image']['type'];
@@ -24,7 +23,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             
             if (!in_array($file_type, $allowed_types)) {
                 $error = 'Invalid file type. Please upload JPEG, PNG, GIF, or WebP images only.';
-            } elseif ($file_size > 5 * 1024 * 1024) { // 5MB limit
+            } elseif ($file_size > 5 * 1024 * 1024) {
                 $error = 'File size too large. Maximum 5MB allowed.';
             } else {
                 $file_extension = pathinfo($_FILES['banner_image']['name'], PATHINFO_EXTENSION);

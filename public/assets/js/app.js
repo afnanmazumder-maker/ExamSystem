@@ -1,9 +1,6 @@
-// Exam System JavaScript
 console.log('Exam System loaded');
 
-// DOM Content Loaded
 document.addEventListener('DOMContentLoaded', function() {
-    // Initialize all components
     initializeFormValidation();
     initializeExamTimer();
     initializeQuestionNavigation();
@@ -11,7 +8,6 @@ document.addEventListener('DOMContentLoaded', function() {
     initializeTooltips();
 });
 
-// Form Validation
 function initializeFormValidation() {
     const forms = document.querySelectorAll('form');
     
@@ -22,7 +18,6 @@ function initializeFormValidation() {
                 return false;
             }
             
-            // Add loading state to submit button
             const submitBtn = this.querySelector('button[type="submit"]');
             if (submitBtn) {
                 submitBtn.disabled = true;
@@ -32,12 +27,10 @@ function initializeFormValidation() {
     });
 }
 
-// Form validation logic
 function validateForm(form) {
     let isValid = true;
     const requiredFields = form.querySelectorAll('[required]');
     
-    // Clear previous error states
     form.querySelectorAll('.error-message').forEach(el => el.remove());
     form.querySelectorAll('.error').forEach(el => el.classList.remove('error'));
     
@@ -48,7 +41,6 @@ function validateForm(form) {
         }
     });
     
-    // Email validation
     const emailFields = form.querySelectorAll('input[type="email"]');
     emailFields.forEach(field => {
         if (field.value && !isValidEmail(field.value)) {
@@ -57,7 +49,6 @@ function validateForm(form) {
         }
     });
     
-    // Password validation
     const passwordFields = form.querySelectorAll('input[type="password"]');
     passwordFields.forEach(field => {
         if (field.value && field.value.length < 6) {
@@ -69,7 +60,6 @@ function validateForm(form) {
     return isValid;
 }
 
-// Show field error
 function showFieldError(field, message) {
     field.classList.add('error');
     const errorDiv = document.createElement('div');
@@ -81,18 +71,16 @@ function showFieldError(field, message) {
     field.parentNode.appendChild(errorDiv);
 }
 
-// Email validation
 function isValidEmail(email) {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     return emailRegex.test(email);
 }
 
-// Exam Timer
 function initializeExamTimer() {
     const timerElement = document.getElementById('exam-timer');
     if (!timerElement) return;
     
-    const duration = parseInt(timerElement.dataset.duration) || 3600; // Default 1 hour
+    const duration = parseInt(timerElement.dataset.duration) || 3600;
     let timeLeft = duration;
     
     const timer = setInterval(() => {
@@ -104,13 +92,11 @@ function initializeExamTimer() {
         
         timerElement.textContent = `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
         
-        // Warning when 5 minutes left
         if (timeLeft <= 300) {
             timerElement.style.color = '#EF4444';
             timerElement.style.fontWeight = 'bold';
         }
         
-        // Auto-submit when time is up
         if (timeLeft <= 0) {
             clearInterval(timer);
             const examForm = document.querySelector('form[action*="submit_exam"]');
@@ -122,12 +108,10 @@ function initializeExamTimer() {
     }, 1000);
 }
 
-// Question Navigation
 function initializeQuestionNavigation() {
     const questions = document.querySelectorAll('.question');
     if (questions.length <= 1) return;
     
-    // Create navigation
     const nav = document.createElement('div');
     nav.className = 'question-nav';
     nav.innerHTML = `
@@ -144,23 +128,19 @@ function initializeQuestionNavigation() {
         </div>
     `;
     
-    // Insert navigation before first question
     questions[0].parentNode.insertBefore(nav, questions[0]);
     
     let currentQuestion = 0;
     
-    // Show only current question
     function showQuestion(index) {
         questions.forEach((q, i) => {
             q.style.display = i === index ? 'block' : 'none';
         });
         
-        // Update navigation
         document.getElementById('prev-question').disabled = index === 0;
         document.getElementById('next-question').disabled = index === questions.length - 1;
         document.querySelector('.question-counter').textContent = `${index + 1} of ${questions.length}`;
         
-        // Update indicators
         document.querySelectorAll('.question-indicator').forEach((indicator, i) => {
             indicator.classList.toggle('active', i === index);
         });
@@ -168,10 +148,7 @@ function initializeQuestionNavigation() {
         currentQuestion = index;
     }
     
-    // Initialize
     showQuestion(0);
-    
-    // Navigation event listeners
     document.getElementById('prev-question').addEventListener('click', () => {
         if (currentQuestion > 0) showQuestion(currentQuestion - 1);
     });
@@ -180,7 +157,6 @@ function initializeQuestionNavigation() {
         if (currentQuestion < questions.length - 1) showQuestion(currentQuestion + 1);
     });
     
-    // Indicator clicks
     document.querySelectorAll('.question-indicator').forEach(indicator => {
         indicator.addEventListener('click', () => {
             const questionIndex = parseInt(indicator.dataset.question);
@@ -189,9 +165,7 @@ function initializeQuestionNavigation() {
     });
 }
 
-// Confirmation dialogs
 function initializeConfirmations() {
-    // Exam submission confirmation
     const examForm = document.querySelector('form[action*="submit_exam"]');
     if (examForm) {
         examForm.addEventListener('submit', function(e) {
@@ -202,7 +176,6 @@ function initializeConfirmations() {
         });
     }
     
-    // Delete confirmations
     document.querySelectorAll('[data-confirm]').forEach(element => {
         element.addEventListener('click', function(e) {
             const message = this.dataset.confirm || 'Are you sure?';
@@ -213,7 +186,6 @@ function initializeConfirmations() {
         });
     });
     
-    // Publish/Unpublish confirmations
     document.querySelectorAll('a[href*="action=publish"], a[href*="action=unpublish"]').forEach(link => {
         link.addEventListener('click', function(e) {
             const action = this.href.includes('publish') ? 'publish' : 'unpublish';
@@ -225,7 +197,6 @@ function initializeConfirmations() {
     });
 }
 
-// Tooltips
 function initializeTooltips() {
     const tooltipElements = document.querySelectorAll('[data-tooltip]');
     
@@ -267,7 +238,6 @@ function hideTooltip(e) {
     }
 }
 
-// Auto-save functionality for exam answers
 function initializeAutoSave() {
     const examForm = document.querySelector('form[action*="submit_exam"]');
     if (!examForm) return;
@@ -277,7 +247,6 @@ function initializeAutoSave() {
     
     const saveKey = `exam_${examId}_answers`;
     
-    // Load saved answers
     const savedAnswers = localStorage.getItem(saveKey);
     if (savedAnswers) {
         try {
@@ -291,7 +260,6 @@ function initializeAutoSave() {
         }
     }
     
-    // Save answers on change
     examForm.addEventListener('change', function() {
         const formData = new FormData(this);
         const answers = {};
@@ -306,16 +274,12 @@ function initializeAutoSave() {
         localStorage.setItem(saveKey, JSON.stringify(answers));
     });
     
-    // Clear saved answers on successful submission
     examForm.addEventListener('submit', function() {
         localStorage.removeItem(saveKey);
     });
 }
 
-// Initialize auto-save when DOM is ready
 document.addEventListener('DOMContentLoaded', initializeAutoSave);
-
-// Utility functions
 function debounce(func, wait) {
     let timeout;
     return function executedFunction(...args) {
