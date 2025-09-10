@@ -1,0 +1,29 @@
+<svg width="1920" height="1080" viewBox="0 0 1920 1080" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="registerGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#11998e;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#38ef7d;stop-opacity:1" />
+    </linearGradient>
+    <pattern id="registerPattern" x="0" y="0" width="120" height="120" patternUnits="userSpaceOnUse">
+      <rect x="58" y="58" width="4" height="4" fill="rgba(255,255,255,0.08)" rx="2"/>
+    </pattern>
+  </defs>
+  
+  <!-- Background -->
+  <rect width="1920" height="1080" fill="url(#registerGradient)"/>
+  <rect width="1920" height="1080" fill="url(#registerPattern)"/>
+  
+  <!-- Academic elements -->
+  <circle cx="300" cy="300" r="120" fill="rgba(255,255,255,0.06)" opacity="0.9"/>
+  <circle cx="1620" cy="780" r="180" fill="rgba(255,255,255,0.04)" opacity="0.7"/>
+  
+  <!-- Book/education symbols -->
+  <rect x="150" y="750" width="100" height="120" rx="8" fill="rgba(255,255,255,0.05)" opacity="0.8"/>
+  <rect x="160" y="760" width="80" height="4" fill="rgba(255,255,255,0.1)"/>
+  <rect x="160" y="780" width="60" height="4" fill="rgba(255,255,255,0.1)"/>
+  <rect x="160" y="800" width="70" height="4" fill="rgba(255,255,255,0.1)"/>
+  
+  <!-- Floating academic elements -->
+  <polygon points="1500,150 1550,200 1450,200" fill="rgba(255,255,255,0.06)" opacity="0.8"/>
+  <circle cx="1750" cy="300" r="40" fill="rgba(255,255,255,0.05)" opacity="0.6"/>
+</svg>

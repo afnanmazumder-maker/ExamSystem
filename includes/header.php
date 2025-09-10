@@ -1,6 +1,29 @@
 <?php
 require_once __DIR__ . '/auth.php';
 $user = current_user();
+
+// Detect current page for background
+$current_page = basename($_SERVER['PHP_SELF'], '.php');
+$bg_class = '';
+switch($current_page) {
+  case 'index':
+    $bg_class = 'login-bg';
+    break;
+  case 'register':
+    $bg_class = 'register-bg';
+    break;
+  case 'dashboard':
+    $bg_class = 'dashboard-bg';
+    break;
+  case 'exam_take':
+    $bg_class = 'exam-bg';
+    break;
+  case 'results':
+    $bg_class = 'results-bg';
+    break;
+  default:
+    $bg_class = 'dashboard-bg';
+}
 ?>
 <!doctype html>
 <html lang="en">
@@ -12,6 +35,8 @@ $user = current_user();
   <script defer src="/assets/js/app.js"></script>
 </head>
 <body>
+<!-- Page Background -->
+<div class="page-bg <?php echo $bg_class; ?>"></div>
 <header class="site-header">
   <div class="container">
     <div class="brand">Exam System</div>
@@ -33,4 +58,4 @@ $user = current_user();
     </nav>
   </div>
 </header>
-<main class="container main">
+<main class="container main content-overlay" style="margin-top: 2rem; padding: 2rem;">

@@ -1,0 +1,30 @@
+<svg width="1920" height="1080" viewBox="0 0 1920 1080" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="resultsGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#f093fb;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#f5576c;stop-opacity:1" />
+    </linearGradient>
+    <pattern id="resultsPattern" x="0" y="0" width="80" height="80" patternUnits="userSpaceOnUse">
+      <polygon points="40,20 45,30 55,30 47,38 50,48 40,42 30,48 33,38 25,30 35,30" fill="rgba(255,255,255,0.06)"/>
+    </pattern>
+  </defs>
+  
+  <!-- Background -->
+  <rect width="1920" height="1080" fill="url(#resultsGradient)"/>
+  <rect width="1920" height="1080" fill="url(#resultsPattern)"/>
+  
+  <!-- Achievement elements -->
+  <circle cx="250" cy="250" r="100" fill="rgba(255,255,255,0.08)" opacity="0.9"/>
+  <circle cx="1670" cy="830" r="150" fill="rgba(255,255,255,0.05)" opacity="0.7"/>
+  
+  <!-- Trophy/medal shapes -->
+  <circle cx="200" cy="800" r="60" fill="rgba(255,255,255,0.07)" opacity="0.8"/>
+  <rect x="180" y="840" width="40" height="20" rx="4" fill="rgba(255,255,255,0.06)"/>
+  
+  <!-- Success indicators -->
+  <polygon points="1600,200 1620,240 1660,240 1630,270 1640,310 1600,290 1560,310 1570,270 1540,240 1580,240" fill="rgba(255,255,255,0.08)" opacity="0.9"/>
+  
+  <!-- Floating celebration elements -->
+  <rect x="1750" y="150" width="20" height="20" rx="10" fill="rgba(255,255,255,0.06)" transform="rotate(45 1760 160)"/>
+  <rect x="100" y="100" width="15" height="15" rx="7" fill="rgba(255,255,255,0.05)" transform="rotate(30 107 107)"/>
+</svg>

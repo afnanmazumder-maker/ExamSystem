@@ -1,0 +1,37 @@
+<svg width="1920" height="1080" viewBox="0 0 1920 1080" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="dashboardGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#a8edea;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#fed6e3;stop-opacity:1" />
+    </linearGradient>
+    <pattern id="dashboardPattern" x="0" y="0" width="100" height="100" patternUnits="userSpaceOnUse">
+      <rect x="48" y="48" width="4" height="4" fill="rgba(255,255,255,0.08)" rx="2"/>
+      <rect x="23" y="23" width="2" height="2" fill="rgba(255,255,255,0.06)" rx="1"/>
+      <rect x="73" y="73" width="2" height="2" fill="rgba(255,255,255,0.06)" rx="1"/>
+    </pattern>
+  </defs>
+  
+  <!-- Background -->
+  <rect width="1920" height="1080" fill="url(#dashboardGradient)"/>
+  <rect width="1920" height="1080" fill="url(#dashboardPattern)"/>
+  
+  <!-- Modern geometric elements -->
+  <circle cx="300" cy="300" r="100" fill="rgba(255,255,255,0.05)" opacity="0.8"/>
+  <circle cx="1620" cy="780" r="140" fill="rgba(255,255,255,0.04)" opacity="0.7"/>
+  
+  <!-- Dashboard grid elements -->
+  <rect x="150" y="800" width="80" height="80" rx="8" fill="rgba(255,255,255,0.06)" opacity="0.8"/>
+  <rect x="160" y="810" width="60" height="8" rx="4" fill="rgba(255,255,255,0.08)"/>
+  <rect x="160" y="830" width="40" height="8" rx="4" fill="rgba(255,255,255,0.06)"/>
+  <rect x="160" y="850" width="50" height="8" rx="4" fill="rgba(255,255,255,0.07)"/>
+  
+  <!-- Floating modern elements -->
+  <polygon points="1700,150 1720,180 1680,180" fill="rgba(255,255,255,0.06)" opacity="0.8"/>
+  <rect x="1750" y="300" width="30" height="30" rx="15" fill="rgba(255,255,255,0.05)" transform="rotate(25 1765 315)"/>
+  
+  <!-- Subtle navigation elements -->
+  <circle cx="100" cy="150" r="20" fill="rgba(255,255,255,0.07)" opacity="0.9"/>
+  <rect x="95" y="145" width="10" height="2" rx="1" fill="rgba(255,255,255,0.1)"/>
+  <rect x="95" y="149" width="10" height="2" rx="1" fill="rgba(255,255,255,0.1)"/>
+  <rect x="95" y="153" width="10" height="2" rx="1" fill="rgba(255,255,255,0.1)"/>
+</svg>

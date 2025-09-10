@@ -14,17 +14,38 @@ include __DIR__ . '/../includes/header.php';
     <ul class="list">
       <?php
       $stmt = $pdo->query('SELECT e.*, u.name AS creator FROM exams e JOIN users u ON e.created_by=u.id WHERE e.is_published=1 ORDER BY e.created_at DESC');
-      foreach ($stmt as $exam): ?>
+      foreach ($stmt as $exam): 
+        // Check if current student has already taken this exam
+        $submission_check = $pdo->prepare('SELECT id FROM submissions WHERE exam_id = ? AND student_id = ?');
+        $submission_check->execute([$exam['id'], $user['id']]);
+        $has_taken = $submission_check->fetch() !== false;
+      ?>
         <li class="exam-card">
-          <?php if ($exam['banner_image']): ?>
+          <?php if (isset($exam['banner_image']) && $exam['banner_image']): ?>
             <div class="exam-banner">
               <img src="/<?php echo e($exam['banner_image']); ?>" alt="<?php echo e($exam['title']); ?> Banner" class="banner-image">
+              <div class="banner-overlay">
+                <h3 class="exam-title"><?php echo e($exam['title']); ?></h3>
+                <p class="exam-creator">by <?php echo e($exam['creator']); ?></p>
+              </div>
+            </div>
+          <?php else: ?>
+            <div class="exam-banner">
+              <div class="banner-overlay">
+                <h3 class="exam-title"><?php echo e($exam['title']); ?></h3>
+                <p class="exam-creator">by <?php echo e($exam['creator']); ?></p>
+              </div>
             </div>
           <?php endif; ?>
           <div class="exam-content">
-            <strong><?php echo e($exam['title']); ?></strong> by <?php echo e($exam['creator']); ?>
             <div><?php echo e($exam['description']); ?></div>
-            <a class="btn" href="/exam_take.php?id=<?php echo (int)$exam['id']; ?>">Take Exam</a>
+            <?php if ($has_taken): ?>
+              <button class="btn btn-disabled" disabled>
+                <span>✓ Completed</span>
+              </button>
+            <?php else: ?>
+              <a class="btn" href="/exam_take.php?id=<?php echo (int)$exam['id']; ?>">Take Exam</a>
+            <?php endif; ?>
           </div>
         </li>
       <?php endforeach; ?>
@@ -40,14 +61,23 @@ include __DIR__ . '/../includes/header.php';
       $stmt->execute([$user['id']]);
       foreach ($stmt as $exam): ?>
         <li class="exam-card">
-          <?php if ($exam['banner_image']): ?>
+          <?php if (isset($exam['banner_image']) && $exam['banner_image']): ?>
             <div class="exam-banner">
               <img src="/<?php echo e($exam['banner_image']); ?>" alt="<?php echo e($exam['title']); ?> Banner" class="banner-image">
+              <div class="banner-overlay">
+                <h3 class="exam-title"><?php echo e($exam['title']); ?></h3>
+                <span class="tag <?php echo $exam['is_published'] ? 'green' : 'gray'; ?>"><?php echo $exam['is_published'] ? 'Published' : 'Draft'; ?></span>
+              </div>
+            </div>
+          <?php else: ?>
+            <div class="exam-banner">
+              <div class="banner-overlay">
+                <h3 class="exam-title"><?php echo e($exam['title']); ?></h3>
+                <span class="tag <?php echo $exam['is_published'] ? 'green' : 'gray'; ?>"><?php echo $exam['is_published'] ? 'Published' : 'Draft'; ?></span>
+              </div>
             </div>
           <?php endif; ?>
           <div class="exam-content">
-            <strong><?php echo e($exam['title']); ?></strong>
-            <span class="tag <?php echo $exam['is_published'] ? 'green' : 'gray'; ?>"><?php echo $exam['is_published'] ? 'Published' : 'Draft'; ?></span>
             <a class="btn" href="/exams_manage.php">Manage</a>
           </div>
         </li>

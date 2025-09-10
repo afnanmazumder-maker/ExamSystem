@@ -33,17 +33,25 @@ include __DIR__ . '/../includes/header.php';
   }
   foreach ($stmt as $exam): ?>
     <li class="exam-card">
-      <?php if ($exam['banner_image']): ?>
+      <?php if (isset($exam['banner_image']) && $exam['banner_image']): ?>
         <div class="exam-banner">
           <img src="/<?php echo e($exam['banner_image']); ?>" alt="<?php echo e($exam['title']); ?> Banner" class="banner-image">
+          <div class="banner-overlay">
+            <h3 class="exam-title"><?php echo e($exam['title']); ?></h3>
+            <?php if (isset($exam['creator'])): ?><p class="exam-creator">by <?php echo e($exam['creator']); ?></p><?php endif; ?>
+            <span class="tag <?php echo $exam['is_published'] ? 'green' : 'gray'; ?>"><?php echo $exam['is_published'] ? 'Published' : 'Draft'; ?></span>
+          </div>
+        </div>
+      <?php else: ?>
+        <div class="exam-banner">
+          <div class="banner-overlay">
+            <h3 class="exam-title"><?php echo e($exam['title']); ?></h3>
+            <?php if (isset($exam['creator'])): ?><p class="exam-creator">by <?php echo e($exam['creator']); ?></p><?php endif; ?>
+            <span class="tag <?php echo $exam['is_published'] ? 'green' : 'gray'; ?>"><?php echo $exam['is_published'] ? 'Published' : 'Draft'; ?></span>
+          </div>
         </div>
       <?php endif; ?>
       <div class="exam-content">
-        <div class="exam-header">
-          <strong><?php echo e($exam['title']); ?></strong>
-          <?php if (isset($exam['creator'])): ?><em> by <?php echo e($exam['creator']); ?></em><?php endif; ?>
-          <span class="tag <?php echo $exam['is_published'] ? 'green' : 'gray'; ?>"><?php echo $exam['is_published'] ? 'Published' : 'Draft'; ?></span>
-        </div>
         <div class="exam-actions">
           <a class="btn" href="/exam_add_question.php?exam_id=<?php echo (int)$exam['id']; ?>">Add Questions</a>
           <?php if ($exam['is_published']): ?>
