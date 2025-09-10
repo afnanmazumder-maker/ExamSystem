@@ -1,5 +1,6 @@
 <?php
 require_once __DIR__ . '/../includes/helpers.php';
+require_once __DIR__ . '/../includes/auth.php';
 ensure_default_admin();
 
 $error = '';

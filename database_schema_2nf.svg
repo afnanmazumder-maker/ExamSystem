@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="1200" height="800" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <style>
+      .table-box { fill: #f8f9fa; stroke: #343a40; stroke-width: 2; }
+      .table-title { fill: #495057; font-family: Arial, sans-serif; font-size: 16px; font-weight: bold; }
+      .field-text { fill: #212529; font-family: Arial, sans-serif; font-size: 12px; }
+      .pk-field { fill: #dc3545; font-weight: bold; }
+      .fk-field { fill: #0d6efd; font-style: italic; }
+      .normal-field { fill: #212529; }
+      .relationship-line { stroke: #6c757d; stroke-width: 2; fill: none; }
+      .relationship-label { fill: #6c757d; font-family: Arial, sans-serif; font-size: 10px; }
+      .title { fill: #212529; font-family: Arial, sans-serif; font-size: 24px; font-weight: bold; text-anchor: middle; }
+      .subtitle { fill: #6c757d; font-family: Arial, sans-serif; font-size: 14px; text-anchor: middle; }
+    </style>
+  </defs>
+  
+  <!-- Title -->
+  <text x="600" y="30" class="title">Exam System Database Schema (2NF)</text>
+  <text x="600" y="50" class="subtitle">Second Normal Form - All non-key attributes are fully functionally dependent on the primary key</text>
+  
+  <!-- Users Table -->
+  <rect x="50" y="100" width="200" height="120" class="table-box"/>
+  <text x="150" y="120" class="table-title" text-anchor="middle">USERS</text>
+  <text x="60" y="140" class="field-text pk-field">id (PK)</text>
+  <text x="60" y="155" class="field-text normal-field">name</text>
+  <text x="60" y="170" class="field-text normal-field">email</text>
+  <text x="60" y="185" class="field-text normal-field">password_hash</text>
+  <text x="60" y="200" class="field-text normal-field">role</text>
+  <text x="60" y="215" class="field-text normal-field">created_at</text>
+  
+  <!-- Exams Table -->
+  <rect x="350" y="100" width="200" height="140" class="table-box"/>
+  <text x="450" y="120" class="table-title" text-anchor="middle">EXAMS</text>
+  <text x="360" y="140" class="field-text pk-field">id (PK)</text>
+  <text x="360" y="155" class="field-text normal-field">title</text>
+  <text x="360" y="170" class="field-text normal-field">description</text>
+  <text x="360" y="185" class="field-text fk-field">created_by (FK)</text>
+  <text x="360" y="200" class="field-text normal-field">is_published</text>
+  <text x="360" y="215" class="field-text normal-field">created_at</text>
+  
+  <!-- Questions Table -->
+  <rect x="650" y="100" width="200" height="120" class="table-box"/>
+  <text x="750" y="120" class="table-title" text-anchor="middle">QUESTIONS</text>
+  <text x="660" y="140" class="field-text pk-field">id (PK)</text>
+  <text x="660" y="155" class="field-text fk-field">exam_id (FK)</text>
+  <text x="660" y="170" class="field-text normal-field">question_text</text>
+  <text x="660" y="185" class="field-text normal-field">type</text>
+  
+  <!-- Options Table -->
+  <rect x="950" y="100" width="200" height="120" class="table-box"/>
+  <text x="1050" y="120" class="table-title" text-anchor="middle">OPTIONS</text>
+  <text x="960" y="140" class="field-text pk-field">id (PK)</text>
+  <text x="960" y="155" class="field-text fk-field">question_id (FK)</text>
+  <text x="960" y="170" class="field-text normal-field">option_text</text>
+  <text x="960" y="185" class="field-text normal-field">is_correct</text>
+  
+  <!-- Submissions Table -->
+  <rect x="200" y="400" width="200" height="120" class="table-box"/>
+  <text x="300" y="420" class="table-title" text-anchor="middle">SUBMISSIONS</text>
+  <text x="210" y="440" class="field-text pk-field">id (PK)</text>
+  <text x="210" y="455" class="field-text fk-field">exam_id (FK)</text>
+  <text x="210" y="470" class="field-text fk-field">student_id (FK)</text>
+  <text x="210" y="485" class="field-text normal-field">submitted_at</text>
+  <text x="210" y="500" class="field-text normal-field">score</text>
+  
+  <!-- Answers Table -->
+  <rect x="500" y="400" width="200" height="120" class="table-box"/>
+  <text x="600" y="420" class="table-title" text-anchor="middle">ANSWERS</text>
+  <text x="510" y="440" class="field-text pk-field">id (PK)</text>
+  <text x="510" y="455" class="field-text fk-field">submission_id (FK)</text>
+  <text x="510" y="470" class="field-text fk-field">question_id (FK)</text>
+  <text x="510" y="485" class="field-text fk-field">selected_option_id (FK)</text>
+  
+  <!-- Relationships -->
+  <!-- Users to Exams -->
+  <line x1="250" y1="160" x2="350" y2="180" class="relationship-line"/>
+  <text x="300" y="175" class="relationship-label">1:N</text>
+  
+  <!-- Exams to Questions -->
+  <line x1="550" y1="160" x2="650" y2="180" class="relationship-line"/>
+  <text x="600" y="175" class="relationship-label">1:N</text>
+  
+  <!-- Questions to Options -->
+  <line x1="850" y1="160" x2="950" y2="180" class="relationship-line"/>
+  <text x="900" y="175" class="relationship-label">1:N</text>
+  
+  <!-- Users to Submissions -->
+  <line x1="150" y1="220" x2="300" y2="460" class="relationship-line"/>
+  <text x="200" y="340" class="relationship-label">1:N</text>
+  
+  <!-- Exams to Submissions -->
+  <line x1="450" y1="240" x2="300" y2="460" class="relationship-line"/>
+  <text x="375" y="350" class="relationship-label">1:N</text>
+  
+  <!-- Submissions to Answers -->
+  <line x1="400" y1="460" x2="500" y2="460" class="relationship-line"/>
+  <text x="450" y="455" class="relationship-label">1:N</text>
+  
+  <!-- Questions to Answers -->
+  <line x1="750" y1="220" x2="600" y2="460" class="relationship-line"/>
+  <text x="675" y="340" class="relationship-label">1:N</text>
+  
+  <!-- Options to Answers -->
+  <line x1="1050" y1="220" x2="700" y2="480" class="relationship-line"/>
+  <text x="875" y="350" class="relationship-label">1:N</text>
+  
+  <!-- 2NF Compliance Notes -->
+  <rect x="50" y="600" width="1100" height="150" fill="#e9ecef" stroke="#6c757d" stroke-width="1"/>
+  <text x="60" y="620" class="table-title">2NF Compliance Analysis</text>
+  
+  <text x="60" y="640" class="field-text">✓ All tables are in 2NF - No partial dependencies exist</text>
+  <text x="60" y="655" class="field-text">✓ Each non-key attribute is fully functionally dependent on the primary key</text>
+  <text x="60" y="670" class="field-text">✓ Composite primary keys are properly normalized</text>
+  <text x="60" y="685" class="field-text">✓ Foreign key relationships maintain referential integrity</text>
+  <text x="60" y="700" class="field-text">✓ No transitive dependencies present</text>
+  <text x="60" y="715" class="field-text">✓ All attributes are atomic (single-valued)</text>
+  <text x="60" y="730" class="field-text">✓ Proper normalization eliminates data redundancy</text>
+  
+  <!-- Legend -->
+  <rect x="800" y="600" width="350" height="150" fill="#f8f9fa" stroke="#6c757d" stroke-width="1"/>
+  <text x="975" y="620" class="table-title" text-anchor="middle">Legend</text>
+  <text x="810" y="640" class="field-text pk-field">PK = Primary Key</text>
+  <text x="810" y="655" class="field-text fk-field">FK = Foreign Key</text>
+  <text x="810" y="670" class="field-text normal-field">Normal Field</text>
+  <text x="810" y="685" class="field-text">1:N = One-to-Many Relationship</text>
+  <text x="810" y="700" class="field-text">Red = Primary Key</text>
+  <text x="810" y="715" class="field-text">Blue = Foreign Key</text>
+  <text x="810" y="730" class="field-text">Black = Regular Attribute</text>
+</svg>
