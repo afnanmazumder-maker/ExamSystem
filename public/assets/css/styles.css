@@ -264,6 +264,78 @@ button:hover, .btn:hover {
   box-shadow: var(--shadow-lg);
 }
 
+/* Exam Cards */
+.exam-card {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: stretch !important;
+  overflow: hidden;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.exam-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1) !important;
+}
+
+.exam-banner {
+  width: 100%;
+  height: 200px;
+  overflow: hidden;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.banner-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.exam-card:hover .banner-image {
+  transform: scale(1.05);
+}
+
+.exam-content {
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  flex-grow: 1;
+}
+
+.exam-content strong {
+  font-size: 1.125rem;
+  color: var(--text-color);
+  margin-bottom: 0.25rem;
+}
+
+.exam-content .btn {
+  margin-top: auto;
+  align-self: flex-start;
+}
+
+.exam-header {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  margin-bottom: 0.75rem;
+}
+
+.exam-actions {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  margin-top: auto;
+}
+
+.exam-actions .btn {
+  margin: 0;
+}
+
 .list-item-header {
   display: flex;
   justify-content: space-between;

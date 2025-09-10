@@ -15,10 +15,17 @@ include __DIR__ . '/../includes/header.php';
       <?php
       $stmt = $pdo->query('SELECT e.*, u.name AS creator FROM exams e JOIN users u ON e.created_by=u.id WHERE e.is_published=1 ORDER BY e.created_at DESC');
       foreach ($stmt as $exam): ?>
-        <li>
-          <strong><?php echo e($exam['title']); ?></strong> by <?php echo e($exam['creator']); ?>
-          <div><?php echo e($exam['description']); ?></div>
-          <a class="btn" href="/exam_take.php?id=<?php echo (int)$exam['id']; ?>">Take Exam</a>
+        <li class="exam-card">
+          <?php if ($exam['banner_image']): ?>
+            <div class="exam-banner">
+              <img src="/<?php echo e($exam['banner_image']); ?>" alt="<?php echo e($exam['title']); ?> Banner" class="banner-image">
+            </div>
+          <?php endif; ?>
+          <div class="exam-content">
+            <strong><?php echo e($exam['title']); ?></strong> by <?php echo e($exam['creator']); ?>
+            <div><?php echo e($exam['description']); ?></div>
+            <a class="btn" href="/exam_take.php?id=<?php echo (int)$exam['id']; ?>">Take Exam</a>
+          </div>
         </li>
       <?php endforeach; ?>
     </ul>
@@ -32,10 +39,17 @@ include __DIR__ . '/../includes/header.php';
       $stmt = $pdo->prepare('SELECT * FROM exams WHERE created_by = ? ORDER BY created_at DESC');
       $stmt->execute([$user['id']]);
       foreach ($stmt as $exam): ?>
-        <li>
-          <strong><?php echo e($exam['title']); ?></strong>
-          <span class="tag <?php echo $exam['is_published'] ? 'green' : 'gray'; ?>"><?php echo $exam['is_published'] ? 'Published' : 'Draft'; ?></span>
-          <a class="btn" href="/exams_manage.php">Manage</a>
+        <li class="exam-card">
+          <?php if ($exam['banner_image']): ?>
+            <div class="exam-banner">
+              <img src="/<?php echo e($exam['banner_image']); ?>" alt="<?php echo e($exam['title']); ?> Banner" class="banner-image">
+            </div>
+          <?php endif; ?>
+          <div class="exam-content">
+            <strong><?php echo e($exam['title']); ?></strong>
+            <span class="tag <?php echo $exam['is_published'] ? 'green' : 'gray'; ?>"><?php echo $exam['is_published'] ? 'Published' : 'Draft'; ?></span>
+            <a class="btn" href="/exams_manage.php">Manage</a>
+          </div>
         </li>
       <?php endforeach; ?>
     </ul>
