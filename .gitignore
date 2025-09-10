@@ -2,6 +2,9 @@
 *.md
 !README.md
 
+# Schema diagrams (keep PDF version only)
+/database_schema_2nf.svg
+
 # System files
 .DS_Store
 .DS_Store?
