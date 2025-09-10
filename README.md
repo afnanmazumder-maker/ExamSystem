@@ -196,10 +196,20 @@ ExamSystem/
 
 ## 🔐 Security Features
 
+### Role-Based Access Control
+
+The system implements a three-tier permission system with the following access capabilities:
+
+| Role | Access Capabilities |
+|------|--------------------|
+| **Admin** | • Manage all users and accounts<br>• View and manage all exams (regardless of creator)<br>• Access all student submissions and results<br>• Publish/unpublish any exam<br>• System-wide analytics and oversight<br>• Create, edit, and delete any content |
+| **Teacher** | • Create and manage own exams<br>• Add questions and options to own exams<br>• Publish/unpublish own exams<br>• View submissions for own exams only<br>• Access student results for own exams<br>• Cannot access other teachers' content |
+| **Student** | • Take published exams<br>• View personal exam results and scores<br>• Access personal submission history<br>• Cannot create or manage exams<br>• Cannot view other students' results<br>• Read-only access to exam content |
+
 ### Authentication & Authorization
 - **Session Management:** Secure PHP sessions
 - **Password Security:** bcrypt hashing
-- **Role-Based Access:** Three-tier permission system
+- **Role-Based Access:** Three-tier permission system with strict boundaries
 - **Input Validation:** SQL injection prevention
 - **XSS Protection:** Output escaping
 
