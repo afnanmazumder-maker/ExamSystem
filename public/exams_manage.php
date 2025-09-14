@@ -5,22 +5,44 @@ require_once __DIR__ . '/../includes/helpers.php';
 require_role(['teacher','admin']);
 $user = current_user();
 
+$message = '';
 if (isset($_GET['action'], $_GET['id'])) {
     $id = (int)$_GET['id'];
     if ($_GET['action'] === 'publish') {
         $stmt = $pdo->prepare($user['role']==='admin' ? 'UPDATE exams SET is_published=1 WHERE id=?' : 'UPDATE exams SET is_published=1 WHERE id=? AND created_by=?');
         $stmt->execute($user['role']==='admin' ? [$id] : [$id, $user['id']]);
+        $message = 'Exam published successfully!';
     } elseif ($_GET['action'] === 'unpublish') {
         $stmt = $pdo->prepare($user['role']==='admin' ? 'UPDATE exams SET is_published=0 WHERE id=?' : 'UPDATE exams SET is_published=0 WHERE id=? AND created_by=?');
         $stmt->execute($user['role']==='admin' ? [$id] : [$id, $user['id']]);
+        $message = 'Exam unpublished successfully!';
+    } elseif ($_GET['action'] === 'delete' && isset($_GET['confirm']) && $_GET['confirm'] === 'yes') {
+        // Check if user has permission to delete this exam
+        $check_stmt = $pdo->prepare($user['role']==='admin' ? 'SELECT id, title FROM exams WHERE id=?' : 'SELECT id, title FROM exams WHERE id=? AND created_by=?');
+        $check_stmt->execute($user['role']==='admin' ? [$id] : [$id, $user['id']]);
+        $exam_to_delete = $check_stmt->fetch();
+        
+        if ($exam_to_delete) {
+            // Delete the exam (CASCADE will handle related records)
+            $delete_stmt = $pdo->prepare($user['role']==='admin' ? 'DELETE FROM exams WHERE id=?' : 'DELETE FROM exams WHERE id=? AND created_by=?');
+            $delete_stmt->execute($user['role']==='admin' ? [$id] : [$id, $user['id']]);
+            $message = 'Exam "' . htmlspecialchars($exam_to_delete['title']) . '" deleted successfully!';
+        } else {
+            $message = 'Error: Exam not found or you do not have permission to delete it.';
+        }
     }
-    header('Location: /exams_manage.php');
-    exit;
+    if ($message) {
+        header('Location: /exams_manage.php?msg=' . urlencode($message));
+        exit;
+    }
 }
 
 include __DIR__ . '/../includes/header.php';
 ?>
 <h1>Manage Exams</h1>
+<?php if (isset($_GET['msg'])): ?>
+  <div class="alert success"><?php echo htmlspecialchars($_GET['msg']); ?></div>
+<?php endif; ?>
 <a class="btn" href="/exams_create.php">Create New Exam</a>
 <ul class="list">
 <?php
@@ -58,9 +80,19 @@ include __DIR__ . '/../includes/header.php';
           <?php else: ?>
             <a class="btn" href="/exams_manage.php?action=publish&id=<?php echo (int)$exam['id']; ?>">Publish</a>
           <?php endif; ?>
+          <a class="btn btn-danger" href="#" onclick="confirmDelete(<?php echo (int)$exam['id']; ?>, '<?php echo addslashes($exam['title']); ?>')">Delete</a>
         </div>
       </div>
     </li>
 <?php endforeach; ?>
 </ul>
+
+<script>
+function confirmDelete(examId, examTitle) {
+    if (confirm('Are you sure you want to delete the exam "' + examTitle + '"?\n\nThis action cannot be undone and will also delete:\n- All questions and options\n- All student submissions\n- All related data')) {
+        window.location.href = '/exams_manage.php?action=delete&id=' + examId + '&confirm=yes';
+    }
+}
+</script>
+
 <?php include __DIR__ . '/../includes/footer.php'; ?>
