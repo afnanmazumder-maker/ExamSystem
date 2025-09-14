@@ -305,7 +305,7 @@ function throttle(func, limit) {
     }
 }
 
-// Export for potential use in other scripts
+
 window.ExamSystem = {
     validateForm,
     showFieldError,

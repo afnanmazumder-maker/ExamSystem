@@ -17,13 +17,13 @@ if (isset($_GET['action'], $_GET['id'])) {
         $stmt->execute($user['role']==='admin' ? [$id] : [$id, $user['id']]);
         $message = 'Exam unpublished successfully!';
     } elseif ($_GET['action'] === 'delete' && isset($_GET['confirm']) && $_GET['confirm'] === 'yes') {
-        // Check if user has permission to delete this exam
+    
         $check_stmt = $pdo->prepare($user['role']==='admin' ? 'SELECT id, title FROM exams WHERE id=?' : 'SELECT id, title FROM exams WHERE id=? AND created_by=?');
         $check_stmt->execute($user['role']==='admin' ? [$id] : [$id, $user['id']]);
         $exam_to_delete = $check_stmt->fetch();
         
         if ($exam_to_delete) {
-            // Delete the exam (CASCADE will handle related records)
+        
             $delete_stmt = $pdo->prepare($user['role']==='admin' ? 'DELETE FROM exams WHERE id=?' : 'DELETE FROM exams WHERE id=? AND created_by=?');
             $delete_stmt->execute($user['role']==='admin' ? [$id] : [$id, $user['id']]);
             $message = 'Exam "' . htmlspecialchars($exam_to_delete['title']) . '" deleted successfully!';

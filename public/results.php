@@ -17,7 +17,7 @@ if (isset($_GET['id'])) {
     }
     $submission = $stmt->fetch();
     if ($submission): 
-        // Get total questions for percentage calculation
+
         $total_stmt = $pdo->prepare('SELECT COUNT(*) as total FROM questions WHERE exam_id = ?');
         $total_stmt->execute([$submission['exam_id']]);
         $total_questions = $total_stmt->fetch()['total'];
@@ -35,7 +35,7 @@ if (isset($_GET['id'])) {
       <h2>Answer Review</h2>
       <div class="answer-review">
         <?php
-        // Get all questions for this exam with answers
+
         $questions_stmt = $pdo->prepare('
             SELECT q.id, q.question_text,
                    a.selected_option_id,
@@ -58,7 +58,7 @@ if (isset($_GET['id'])) {
             $correct_flags = explode(',', $question['correct_flags']);
             $selected_option = $question['selected_option_id'];
             
-            // Find correct answer
+
             $correct_option_id = null;
             for ($i = 0; $i < count($option_ids); $i++) {
                 if ($correct_flags[$i] == '1') {

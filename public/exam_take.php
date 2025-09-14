@@ -16,34 +16,34 @@ if ($check_stmt->fetch()) {
     die('You have already taken this exam.');
 }
 
-// Check for existing exam session or create new one
+
 $session_stmt = $pdo->prepare('SELECT * FROM exam_sessions WHERE exam_id=? AND student_id=? AND is_completed=0');
 $session_stmt->execute([$exam_id, current_user()['id']]);
 $exam_session = $session_stmt->fetch();
 
 if (!$exam_session) {
-    // Create new exam session
+
     $create_session = $pdo->prepare('INSERT INTO exam_sessions (exam_id, student_id) VALUES (?, ?)');
     $create_session->execute([$exam_id, current_user()['id']]);
     $session_id = $pdo->lastInsertId();
     
-    // Get the newly created session
+
     $session_stmt->execute([$exam_id, current_user()['id']]);
     $exam_session = $session_stmt->fetch();
 } else {
-    // Update last activity for existing session
+
     $update_activity = $pdo->prepare('UPDATE exam_sessions SET last_activity = CURRENT_TIMESTAMP WHERE id = ?');
     $update_activity->execute([$exam_session['id']]);
 }
 
-// Calculate elapsed time and remaining time
+
 $start_time = new DateTime($exam_session['started_at']);
 $current_time = new DateTime();
 $elapsed_seconds = $current_time->getTimestamp() - $start_time->getTimestamp();
 $total_time_seconds = $exam['time_limit_minutes'] * 60;
 $remaining_seconds = max(0, $total_time_seconds - $elapsed_seconds);
 
-// If time is up, redirect or show message
+
 if ($remaining_seconds <= 0) {
     echo '<div class="alert alert-danger">Time is up! This exam has expired.</div>';
     include __DIR__ . '/../includes/footer.php';
@@ -84,7 +84,7 @@ const timerElement = document.getElementById('timer');
 const examForm = document.getElementById('exam-form');
 const sessionId = <?php echo $exam_session['id']; ?>;
 
-// Update session activity every 30 seconds
+
 setInterval(() => {
     fetch('/update_session_activity.php', {
         method: 'POST',

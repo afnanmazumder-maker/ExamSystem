@@ -20,7 +20,7 @@ if (!$session_id) {
     exit;
 }
 
-// Verify the session belongs to the current user
+
 $verify_stmt = $pdo->prepare('SELECT id FROM exam_sessions WHERE id = ? AND student_id = ? AND is_completed = 0');
 $verify_stmt->execute([$session_id, current_user()['id']]);
 
@@ -30,7 +30,7 @@ if (!$verify_stmt->fetch()) {
     exit;
 }
 
-// Update last activity
+
 $update_stmt = $pdo->prepare('UPDATE exam_sessions SET last_activity = CURRENT_TIMESTAMP WHERE id = ?');
 $update_stmt->execute([$session_id]);
 

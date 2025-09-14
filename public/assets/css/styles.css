@@ -90,7 +90,7 @@ small {
   }
 }
 
-/* Header Styles */
+
 .site-header {
   background: rgba(255, 255, 255, 0.95);
   border-bottom: 1px solid var(--border);
@@ -147,7 +147,7 @@ nav a:focus {
   outline-offset: 2px;
 }
 
-/* Main Content */
+
 .main {
   padding: 3rem 0;
   min-height: calc(100vh - 200px);
@@ -168,7 +168,7 @@ nav a:focus {
   }
 }
 
-/* Typography */
+
 h1, h2, h3, h4, h5, h6 {
   color: var(--text);
   margin-bottom: 1rem;
@@ -195,7 +195,7 @@ p {
   color: var(--text-light);
 }
 
-/* Forms */
+
 .auth {
   max-width: 400px;
   margin: 2rem auto;
@@ -295,7 +295,7 @@ textarea {
   margin-top: 0.25rem;
 }
 
-/* Buttons */
+
 button, .btn {
   display: inline-flex;
   align-items: center;
@@ -425,7 +425,7 @@ button:focus, .btn:focus {
   }
 }
 
-/* Alerts */
+
 .alert {
   padding: 1rem 1.25rem;
   border-radius: var(--radius);
@@ -488,7 +488,7 @@ button:focus, .btn:focus {
   box-shadow: 0 4px 6px rgba(59, 130, 246, 0.1);
 }
 
-/* Lists */
+
 .list {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -496,7 +496,7 @@ button:focus, .btn:focus {
   list-style: none;
 }
 
-/* 3-column grid for exam cards */
+
 @media (min-width: 1024px) {
   .list {
     grid-template-columns: repeat(3, 1fr);
@@ -523,7 +523,7 @@ button:focus, .btn:focus {
   box-shadow: var(--shadow-lg);
 }
 
-/* Exam Cards */
+
 .exam-card {
   display: flex !important;
   flex-direction: column !important;
@@ -746,7 +746,7 @@ button:focus, .btn:focus {
   margin-top: 1rem;
 }
 
-/* Tags */
+
 .tag {
   display: inline-flex;
   align-items: center;
@@ -778,7 +778,7 @@ button:focus, .btn:focus {
   color: #991B1B;
 }
 
-/* Questions */
+
 .question {
   background: var(--bg-white);
   padding: 2rem;
@@ -836,7 +836,7 @@ button:focus, .btn:focus {
   flex: 1;
 }
 
-/* Dashboard Grid */
+
 .dashboard-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -857,7 +857,7 @@ button:focus, .btn:focus {
   margin-bottom: 1rem;
 }
 
-/* Stats */
+
 .stats {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
@@ -888,7 +888,7 @@ button:focus, .btn:focus {
   letter-spacing: 0.05em;
 }
 
-/* Footer */
+
 .site-footer {
   background: var(--bg-white);
   border-top: 1px solid var(--border);
@@ -898,7 +898,7 @@ button:focus, .btn:focus {
   color: var(--text-light);
 }
 
-/* Responsive Design */
+
 @media (max-width: 768px) {
   .container {
     padding: 0 0.5rem;
@@ -958,7 +958,7 @@ button:focus, .btn:focus {
   }
 }
 
-/* Loading States */
+
 .loading {
   display: inline-block;
   width: 20px;
@@ -1044,7 +1044,7 @@ button:focus, .btn:focus {
   }
 }
 
-/* Utilities */
+
 .text-center { text-align: center; }
 .text-right { text-align: right; }
 .text-left { text-align: left; }
@@ -1071,7 +1071,7 @@ button:focus, .btn:focus {
 .text-warning { color: var(--warning); }
 .text-muted { color: var(--text-light); }
 
-/* Spacing */
+
 .m-0 { margin: 0; }
 .m-1 { margin: 0.25rem; }
 .m-2 { margin: 0.5rem; }
@@ -1134,7 +1134,7 @@ button:focus, .btn:focus {
 .pb-4 { padding-bottom: 1rem; }
 .pb-6 { padding-bottom: 1.5rem; }
 
-/* Display */
+
 .hidden { display: none; }
 .block { display: block; }
 .inline { display: inline; }
@@ -1144,7 +1144,7 @@ button:focus, .btn:focus {
 .grid { display: grid; }
 .inline-grid { display: inline-grid; }
 
-/* Flexbox */
+
 .flex-row { flex-direction: row; }
 .flex-col { flex-direction: column; }
 .flex-wrap { flex-wrap: wrap; }
@@ -1168,7 +1168,7 @@ button:focus, .btn:focus {
 .gap-6 { gap: 1.5rem; }
 .gap-8 { gap: 2rem; }
 
-/* Borders */
+
 .border { border: 1px solid var(--border); }
 .border-0 { border: 0; }
 .border-t { border-top: 1px solid var(--border); }
@@ -1182,7 +1182,7 @@ button:focus, .btn:focus {
 .rounded-xl { border-radius: var(--radius-xl); }
 .rounded-full { border-radius: 9999px; }
 
-/* Shadows */
+
 .shadow-none { box-shadow: none; }
 .shadow-sm { box-shadow: var(--shadow-sm); }
 .shadow { box-shadow: var(--shadow); }
@@ -1190,7 +1190,7 @@ button:focus, .btn:focus {
 .shadow-lg { box-shadow: var(--shadow-lg); }
 .shadow-xl { box-shadow: var(--shadow-xl); }
 
-/* Responsive utilities */
+
 @media (max-width: 640px) {
   .sm\:hidden { display: none; }
   .sm\:block { display: block; }
@@ -1213,7 +1213,7 @@ button:focus, .btn:focus {
   .lg\:flex { display: flex; }
 }
 
-/* Page Background Styles */
+
 .page-bg {
   position: fixed;
   top: 0;
@@ -1248,7 +1248,7 @@ button:focus, .btn:focus {
   background-image: url('/assets/images/results-bg.svg');
 }
 
-/* Responsive background adjustments */
+
 @media (max-width: 768px) {
   .page-bg {
     background-attachment: scroll;
@@ -1262,7 +1262,7 @@ button:focus, .btn:focus {
   }
 }
 
-/* Content overlay for better readability */
+
 .content-overlay {
   background: rgba(255, 255, 255, 0.95);
   backdrop-filter: blur(10px);
@@ -1271,7 +1271,7 @@ button:focus, .btn:focus {
   border: 1px solid rgba(255, 255, 255, 0.2);
 }
 
-/* Exam Timer */
+
 .exam-timer {
   background: var(--warning);
   color: var(--bg-white);
@@ -1299,7 +1299,7 @@ button:focus, .btn:focus {
   margin-left: 0.5rem;
 }
 
-/* Answer Review Styles */
+
 .result-summary {
   background: var(--bg-secondary);
   padding: 1.5rem;
@@ -1414,7 +1414,7 @@ button:focus, .btn:focus {
   color: white;
 }
 
-/* Responsive Design for Answer Review */
+
 @media (max-width: 768px) {
   .question-review {
     padding: 1rem;

@@ -42,7 +42,7 @@ try {
     $upd = $pdo->prepare('UPDATE submissions SET score=? WHERE id=?');
     $upd->execute([$score, $submission_id]);
     
-    // Mark exam session as completed
+    
     $complete_session = $pdo->prepare('UPDATE exam_sessions SET is_completed = 1 WHERE exam_id = ? AND student_id = ? AND is_completed = 0');
     $complete_session->execute([$exam_id, current_user()['id']]);
     
